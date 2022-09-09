@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Link, Route, Routes } from 'react-router-dom';
+import Card from './Components/Card';
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -39,10 +41,24 @@ function App() {
           : posts.map((item)=>{
             return(
               <div className='card'>
-                <h2>Name: {item.name}</h2>
+                <Link to='/name'>
+                  <h2>Name: {item.name}</h2>
+                </Link>
                 <p>Status: {item.status}</p>
-                {btn ? <button>test</button>: ''}
                 <img src={item.image} alt='imagen'/>
+
+
+              <Routes>
+                <Route exact path='/name' element={
+                  <Card 
+                    name={item.name}
+                    status={item.status}
+                    image={item.image}
+                    location={item.location} />
+                  } />
+              </Routes>
+
+
               </div>
             )
           })
